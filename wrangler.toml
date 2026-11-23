@@ -1,3 +1,3 @@
-name = "followers"
-main = "src/index.js"
+name = "viral"
+main = "index.js"
 compatibility_date = "2026-11-23"
