@@ -1,90 +1,186 @@
+
 export default {
   async fetch(request) {
     const html = `<!DOCTYPE html>
-<html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ViralBoost KE - Paste Link</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIRAL - Social Promotion</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#000;color:#fff}
-.header{padding:14px 18px;display:flex;justify-content:space-between;border-bottom:1px solid #222}
-.logo{font-weight:800}.logo span{color:#ff0050}
-.badge{background:#ff0050;color:#fff;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:800}
-.hero{padding:22px 18px;text-align:center}
-.hero h1{font-size:26px;font-weight:900}
-.hero p{color:#999;font-size:13px;margin-top:8px}
-.cards{padding:14px;max-width:460px;margin:0 auto;display:grid;gap:8px}
-.card{background:#111;border:1px solid #222;border-radius:12px;padding:12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.card.active{border-color:#ff0050;background:#1a0a0f}
-.price{color:#00ff88;font-weight:800}
-.form{max-width:460px;margin:14px auto;padding:16px;background:#0f0f0f;border-radius:16px;border:1px solid #222}
-input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #333;background:#000;color:#fff;margin:6px 0;font-size:14px}
-.mpesa{background:#00a65122;border:1px dashed #00a651;border-radius:10px;padding:10px;text-align:center;color:#4cff9a;font-size:13px;margin:8px 0}
-.btn{width:100%;background:linear-gradient(90deg,#ff0050,#ff7a00);color:#fff;border:none;border-radius:28px;padding:13px;font-weight:800;cursor:pointer}
-.lbl{font-size:12px;color:#888;margin:8px 0 2px 2px;display:block}
-.footer{text-align:center;color:#555;padding:16px;font-size:11px}
-.wa{position:fixed;bottom:16px;right:16px;background:#25D366;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-weight:900}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b12;
+  color: white;
+}
+header {
+  text-align: center;
+  padding: 30px 15px;
+  background: linear-gradient(135deg,#7c3aed,#ec4899);
+}
+header h1 { margin: 0; font-size: 36px; }
+header p { margin-bottom: 0; }
+.container {
+  max-width: 500px;
+  margin: 25px auto;
+  padding: 20px;
+}
+.card {
+  background: #171722;
+  padding: 22px;
+  border-radius: 16px;
+  border: 1px solid #303040;
+}
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+input, select, textarea {
+  width: 100%;
+  padding: 13px;
+  border-radius: 9px;
+  border: 1px solid #373747;
+  background: #222230;
+  color: white;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 10px;
+  background: #a855f7;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+.whatsapp {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  margin-top: 15px;
+  background: #16a34a;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+}
+.summary {
+  margin-top: 20px;
+  padding: 15px;
+  background: #222230;
+  border-radius: 10px;
+}
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #999;
+}
 </style>
-</head><body>
-<div class="header"><div class="logo">VIRAL<span>BOOST</span> KE</div><div class="badge">PASTE LINK</div></div>
-<div class="hero">
-<h1>Paste TikTok Link & Boost</h1>
-<p>Followers, Likes, Views - 25 bob starting - 0746885823</p>
+</head>
+<body>
+
+<header>
+  <h1>🔥 VIRAL</h1>
+  <p>Promote your content. Grow your reach.</p>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h2>Promotion Request</h2>
+    <p>Submit your social media content for a promotional campaign.</p>
+
+    <label>Platform</label>
+    <select id="platform">
+      <option>TikTok</option>
+      <option>Facebook</option>
+      <option>Instagram</option>
+    </select>
+
+    <label>Post URL</label>
+    <input id="post" type="url" placeholder="Paste your post link here">
+
+    <label>Promotion Package</label>
+    <select id="package">
+      <option value="Basic Promotion">Basic Promotion</option>
+      <option value="Standard Promotion">Standard Promotion</option>
+      <option value="Premium Promotion">Premium Promotion</option>
+    </select>
+
+    <label>Campaign Goal</label>
+    <select id="goal">
+      <option>Reach more people</option>
+      <option>Advertise my business</option>
+      <option>Promote my content</option>
+      <option>Increase brand awareness</option>
+    </select>
+
+    <label>Additional information</label>
+    <textarea id="details" placeholder="Describe what you want promoted"></textarea>
+
+    <div class="summary">
+      <strong>Order Summary</strong>
+      <p id="summary">Platform: TikTok</p>
+    </div>
+
+    <button onclick="submitOrder()">Submit Promotion Request</button>
+
+    <a class="whatsapp"
+       href="https://wa.me/254746885823"
+       target="_blank">
+       Contact us on WhatsApp
+    </a>
+  </div>
 </div>
 
-<div class="form">
-<span class="lbl">1. TikTok Link or @Username</span>
-<input id="link" placeholder="https://www.tiktok.com/@yourname/video/... or @username">
-
-<span class="lbl">2. Service</span>
-<select id="service" onchange="upd()">
-<option value="Followers">Followers</option>
-<option value="Likes">Likes ❤️</option>
-<option value="Views">Views 👁️</option>
-<option value="Comments">Comments</option>
-</select>
-
-<span class="lbl">3. Quantity</span>
-<select id="plan" onchange="upd()">
-<option value="100 - 25 KES">100 - 25 KES</option>
-<option value="500 - 50 KES">500 - 50 KES</option>
-<option value="1000 - 100 KES" selected>1000 - 100 KES</option>
-<option value="5000 - 400 KES">5000 - 400 KES</option>
-<option value="10000 - 750 KES">10000 - 750 KES</option>
-</select>
-
-<div id="preview" style="background:#111;border-radius:10px;padding:10px;margin:8px 0;font-size:13px;color:#aaa">Service: Followers<br>Link: (paste above)</div>
-
-<input id="phone" placeholder="Your M-Pesa Number">
-<div class="mpesa">SEND MONEY TO<br><b>0746885823</b><br>Then enter code below</div>
-<input id="code" placeholder="M-Pesa Code">
-<button class="btn" onclick="order()">BOOST NOW - WHATSAPP</button>
-</div>
-
-<div class="footer">ViralBoost KE • Kisumu • 0746885823<br>viral.shepherdjunior2008.workers.dev</div>
-<a class="wa" href="https://wa.me/254746885823">W</a>
+<footer>VIRAL &copy; 2026 — Social Promotion</footer>
 
 <script>
-function upd(){
- const s=document.getElementById('service').value;
- const l=document.getElementById('link').value||'(paste link)';
- const p=document.getElementById('plan').value;
- document.getElementById('preview').innerHTML = 'Service: '+s+'<br>Plan: '+p+'<br>Link: '+l;
-}
-document.getElementById('link').addEventListener('input',upd);
-function order(){
- const link=document.getElementById('link').value;
- const serv=document.getElementById('service').value;
- const plan=document.getElementById('plan').value;
- const ph=document.getElementById('phone').value;
- const code=document.getElementById('code').value;
- if(!link||!ph){alert('Paste Link and M-Pesa number');return;}
- const msg=\`NEW BOOST ORDER%0AService: \${serv}%0ALink: \${link}%0AQuantity: \${plan}%0APhone: \${ph}%0AMpesa Code: \${code}\`;
- window.open('https://wa.me/254746885823?text='+encodeURIComponent(msg),'_blank');
-}
-</script>
-</body></html>`;
-    return new Response(html, { headers: { "content-type": "text/html;charset=UTF-8" } });
+function submitOrder() {
+  const platform = document.getElementById("platform").value;
+  const post = document.getElementById("post").value;
+  const pack = document.getElementById("package").value;
+  const goal = document.getElementById("goal").value;
+  const details = document.getElementById("details").value;
+
+  if (!post) {
+    alert("Please enter your social media post link.");
+    return;
   }
+
+  const message =
+    "Hello VIRAL! I would like to request a promotion.\\n\\n" +
+    "Platform: " + platform + "\\n" +
+    "Post: " + post + "\\n" +
+    "Package: " + pack + "\\n" +
+    "Goal: " + goal + "\\n" +
+    "Details: " + details;
+
+  const whatsapp =
+    "https://wa.me/254746885823?text=" +
+    encodeURIComponent(message);
+
+  window.open(whatsapp, "_blank");
 }
+
+document.getElementById("platform").onchange = function() {
+  document.getElementById("summary").textContent =
+    "Platform: " + this.value;
+};
+</script>
+
+</body>
+</html>`;
+
+    return new Response(html, {
+      headers: {
+        "content-type": "text/html;charset=UTF-8"
+      }
+    });
+  }
+};
