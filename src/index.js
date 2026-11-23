@@ -1,49 +1,151 @@
-export default {
-  async fetch() {
-    const html = `
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ViralBoost - Followers Tool</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Boost Services</title>
+
 <style>
-body{margin:0;background:#000;color:#fff;font-family:system-ui;padding:15px;text-align:center}
-h1{color:#ff0050}
-.card{background:#111;border:1px solid #333;border-radius:16px;padding:18px;max-width:480px;margin:15px auto}
-input,select,button{width:100%;padding:14px;margin:8px 0;border-radius:10px;border:none;font-size:16px;box-sizing:border-box}
-button{background:#ff0050;color:#fff;font-weight:bold}
-#out{background:#222;border-radius:10px;padding:12px;margin-top:10px;text-align:left;white-space:pre-wrap;display:none}
-.ad{border:1px dashed #555;padding:10px;color:#888;border-radius:10px;max-width:480px;margin:15px auto}
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+body {
+  margin: 0;
+  background: #10121b;
+  color: white;
+}
+header {
+  text-align: center;
+  padding: 25px;
+  background: #191c2b;
+}
+header h1 { color: #00e5ff; }
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+}
+.card {
+  background: #202436;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 15px;
+}
+select, input, button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+}
+button {
+  background: #00c853;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.pay {
+  background: #087f5b;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+.whatsapp {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  background: #25d366;
+  padding: 15px;
+  color: white;
+  border-radius: 10px;
+  margin-top: 15px;
+  font-weight: bold;
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #aaa;
+}
 </style>
 </head>
+
 <body>
-<h1>🔥 VIRAL BOOST</h1>
-<p>Get Real Followers & Likes - No Password</p>
-<div class="card">
-<select id="plat"><option>TikTok</option><option>Instagram</option><option>YouTube</option><option>Facebook</option></select>
-<input id="user" placeholder="@your username">
-<input id="niche" placeholder="Your niche e.g comedy, cooking">
-<button onclick="boost()">🚀 BOOST MY ACCOUNT</button>
-<div id="out"></div>
-<a id="wa" style="display:none" href="https://wa.me/254700000000?text=I%20want%20buy%20followers"><button style="background:#25D366;margin-top:10px">💬 Buy Followers via M-Pesa - WhatsApp</button></a>
+
+<header>
+  <h1>Social Boost Services</h1>
+  <p>Social Media Promotion & Growth Services</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Choose Your Service</h2>
+
+    <select id="platform">
+      <option value="TikTok">TikTok</option>
+      <option value="Facebook">Facebook</option>
+      <option value="YouTube">YouTube</option>
+      <option value="WhatsApp">WhatsApp</option>
+    </select>
+
+    <select id="service">
+      <option>Content Promotion</option>
+      <option>Page Promotion</option>
+      <option>Channel Promotion</option>
+      <option>Audience Growth Consultation</option>
+    </select>
+
+    <input type="number" id="amount"
+           placeholder="Enter your budget (KES)"
+           min="1">
+
+    <button onclick="makeOrder()">Continue to Order</button>
+  </div>
+
+  <div class="pay">
+    <h2>M-Pesa Payment</h2>
+    <p>Pay to this number:</p>
+    <h1>0746885823</h1>
+    <p>Confirm your payment through M-Pesa before contacting us.</p>
+  </div>
+
+  <a class="whatsapp"
+     href="https://wa.me/254746885823"
+     target="_blank">
+     Contact Us on WhatsApp
+  </a>
+
 </div>
-<div class="ad">AD SPACE - Put AdSense here to earn</div>
+
+<footer>
+  &copy; 2026 Social Boost Services
+</footer>
+
 <script>
-function boost(){
-var u=document.getElementById('user').value||'@you';
-var n=document.getElementById('niche').value||'viral';
-var p=document.getElementById('plat').value;
-var tags='#'+n+' #fyp #viral #kenya #'+p.toLowerCase()+' #foryou #254 #trending #kisumu #nairobi #xyzbca';
-var caps='POV: '+n+' hits different\\nDay 1 of '+n+' till 100k followers\\nThis '+n+' hack got me 10k views overnight';
-var el=document.getElementById('out');
-el.style.display='block';
-el.innerText='✅ ANALYSIS FOR '+u+' ON '+p+'\\n\\n🔥 VIRAL BIO:\\n'+n+' daily | Kisumu KE | Follow for more\\n\\n📈 3 VIRAL CAPTIONS:\\n'+caps+'\\n\\n#️⃣ 30 HASHTAGS:\\n'+tags+'\\n\\n⏰ BEST TIME: 7:30 PM EAT';
-document.getElementById('wa').style.display='block';
+function makeOrder() {
+  const platform = document.getElementById("platform").value;
+  const service = document.getElementById("service").value;
+  const amount = document.getElementById("amount").value;
+
+  if (!amount || amount <= 0) {
+    alert("Please enter your budget.");
+    return;
+  }
+
+  const message =
+    `Hello, I would like to order a service.%0A` +
+    `Platform: ${platform}%0A` +
+    `Service: ${service}%0A` +
+    `Budget: KES ${amount}%0A` +
+    `Payment number: 0746885823`;
+
+  window.open(
+    "https://wa.me/254746885823?text=" + message,
+    "_blank"
+  );
 }
 </script>
+
 </body>
 </html>
-`;
-    return new Response(html, { headers: { "content-type": "text/html" } });
-  }
-}
