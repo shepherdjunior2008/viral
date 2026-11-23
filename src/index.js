@@ -1,6 +1,5 @@
 export default {
-  async fetch(request) {
-    return new Response(html, { headers: { "content-type": "text/html" } });
+  async fetch() {
+    return new Response("Viral is LIVE - Loading Tool...");
   }
 }
-const html = '<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>ViralBoost</title><style>body{margin:0;font-family:system-ui;background:#000;color:#fff;padding:15px;text-align:center}h1{color:#ff0050}.card{background:#111;border:1px solid #333;border-radius:16px;padding:18px;max-width:500px;margin:15px auto}input,select,button{width:100%;padding:14px;margin:8px 0;border-radius:10px;border:none}button{background:#ff0050;color:#fff;font-weight:bold}#out{background:#222;border-radius:10px;padding:12px;margin-top:10px;text-align:left;white-space:pre-wrap;display:none}</style></head><body><h1>🔥 VIRAL BOOST</h1><p>Get Followers & Likes</p><div class="card"><select id="plat"><option>TikTok</option><option>Instagram</option><option>YouTube</option></select><input id="user" placeholder="@your username"><input id="niche" placeholder="Niche e.g comedy"><button onclick="boost()">🚀 BOOST MY ACCOUNT</button><div id="out"></div></div><script>function boost(){var u=document.getElementById("user").value||"@you";var n=document.getElementById("niche").value||"viral";var p=document.getElementById("plat").value;var tags="#"+n+" #fyp #viral #kenya #"+p.toLowerCase()+" #foryou #254";var caps="POV: "+n+" hits different\\nDay 1 of "+n+" till 100k";var el=document.getElementById("out");el.style.display="block";el.innerText="✅ FOR "+u+" ON "+p+"\\n\\n🔥 BIO:\\n"+n+" daily | Kisumu KE\\n\\n📈 CAPTIONS:\\n"+caps+"\\n\\n#️⃣ HASHTAGS:\\n"+tags+"\\n\\n⏰ Post at 7:30 PM EAT";}</script></body></html>';
