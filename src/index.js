@@ -1,182 +1,177 @@
+
 export default {
   async fetch(request) {
     const html = `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Viral Hub</title>
+<title>VIRAL - Social Promotion</title>
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#0b0b12;
-  color:white
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b12;
+  color: white;
 }
-header{
-  padding:22px;
-  text-align:center;
-  background:#151522;
-  border-bottom:1px solid #28283a
+header {
+  text-align: center;
+  padding: 30px 15px;
+  background: linear-gradient(135deg,#7c3aed,#ec4899);
 }
-header h1{color:#a78bfa;margin:0}
-header p{color:#ccc}
-.hero{
-  text-align:center;
-  padding:40px 20px
+header h1 { margin: 0; font-size: 36px; }
+header p { margin-bottom: 0; }
+.container {
+  max-width: 500px;
+  margin: 25px auto;
+  padding: 20px;
 }
-.hero h2{font-size:30px}
-.hero p{color:#c6c6d2}
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:20px
+.card {
+  background: #171722;
+  padding: 22px;
+  border-radius: 16px;
+  border: 1px solid #303040;
 }
-.card{
-  background:#171725;
-  border:1px solid #303044;
-  border-radius:14px;
-  padding:20px;
-  margin-bottom:16px
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  font-weight: bold;
 }
-.card h3{color:#c4b5fd}
-.price{font-size:22px;color:#a78bfa;font-weight:bold}
-button{
-  border:0;
-  background:#7c3aed;
-  color:white;
-  padding:13px;
-  border-radius:9px;
-  cursor:pointer;
-  width:100%;
-  font-weight:bold
+input, select, textarea {
+  width: 100%;
+  padding: 13px;
+  border-radius: 9px;
+  border: 1px solid #373747;
+  background: #222230;
+  color: white;
 }
-button:hover{background:#6d28d9}
-input,select,textarea{
-  width:100%;
-  padding:13px;
-  margin:8px 0 15px;
-  border-radius:8px;
-  border:1px solid #343447;
-  background:#10101a;
-  color:white
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 10px;
+  background: #a855f7;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
 }
-label{font-size:14px;color:#ddd}
-a{color:#c4b5fd}
-.contact{
-  background:#10271d;
-  border:1px solid #245c3d
+.whatsapp {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  margin-top: 15px;
+  background: #16a34a;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
 }
-footer{
-  text-align:center;
-  color:#aaa;
-  padding:25px
+.summary {
+  margin-top: 20px;
+  padding: 15px;
+  background: #222230;
+  border-radius: 10px;
+}
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #999;
 }
 </style>
 </head>
 <body>
 
 <header>
-<h1>VIRAL HUB</h1>
-<p>Digital promotion & creative services</p>
+  <h1>🔥 VIRAL</h1>
+  <p>Promote your content. Grow your reach.</p>
 </header>
 
-<section class="hero">
-<h2>Grow Your Brand Online</h2>
-<p>Promote your business, content and brand with creative digital services.</p>
-</section>
-
 <div class="container">
+  <div class="card">
+    <h2>Promotion Request</h2>
+    <p>Submit your social media content for a promotional campaign.</p>
 
-<h2>Our Services</h2>
+    <label>Platform</label>
+    <select id="platform">
+      <option>TikTok</option>
+      <option>Facebook</option>
+      <option>Instagram</option>
+    </select>
 
-<div class="card">
-<h3>Social Media Content Creation</h3>
-<p>Creative captions, post ideas and content planning for your page.</p>
-<p class="price">Price: Contact us</p>
+    <label>Post URL</label>
+    <input id="post" type="url" placeholder="Paste your post link here">
+
+    <label>Promotion Package</label>
+    <select id="package">
+      <option value="Basic Promotion">Basic Promotion</option>
+      <option value="Standard Promotion">Standard Promotion</option>
+      <option value="Premium Promotion">Premium Promotion</option>
+    </select>
+
+    <label>Campaign Goal</label>
+    <select id="goal">
+      <option>Reach more people</option>
+      <option>Advertise my business</option>
+      <option>Promote my content</option>
+      <option>Increase brand awareness</option>
+    </select>
+
+    <label>Additional information</label>
+    <textarea id="details" placeholder="Describe what you want promoted"></textarea>
+
+    <div class="summary">
+      <strong>Order Summary</strong>
+      <p id="summary">Platform: TikTok</p>
+    </div>
+
+    <button onclick="submitOrder()">Submit Promotion Request</button>
+
+    <a class="whatsapp"
+       href="https://wa.me/254746885823"
+       target="_blank">
+       Contact us on WhatsApp
+    </a>
+  </div>
 </div>
 
-<div class="card">
-<h3>Poster & Graphic Design</h3>
-<p>Promotional posters, event graphics and business advertisements.</p>
-<p class="price">Price: Contact us</p>
-</div>
-
-<div class="card">
-<h3>Video Editing</h3>
-<p>Short-form video editing for promotional content and social media.</p>
-<p class="price">Price: Contact us</p>
-</div>
-
-<div class="card">
-<h3>Business & Page Promotion</h3>
-<p>Campaign planning and promotion to help your business reach real audiences.</p>
-<p class="price">Price: Contact us</p>
-</div>
-
-<div class="card">
-<h2>Place an Order</h2>
-
-<form id="orderForm">
-<label>Your Name</label>
-<input id="customerName" placeholder="Enter your name" required>
-
-<label>Select Service</label>
-<select id="service" required>
-<option value="">Choose a service</option>
-<option>Social Media Content Creation</option>
-<option>Poster & Graphic Design</option>
-<option>Video Editing</option>
-<option>Business & Page Promotion</option>
-</select>
-
-<label>Describe what you need</label>
-<textarea id="details" rows="4" placeholder="Describe your order..." required></textarea>
-
-<button type="submit">Send Order via WhatsApp</button>
-</form>
-</div>
-
-<div class="card contact">
-<h2>Payment Information</h2>
-<p>M-Pesa Number:</p>
-<h3>0746885823</h3>
-<p>Confirm payment instructions with us before sending money.
-Keep your M-Pesa confirmation message as proof of payment.</p>
-</div>
-
-<div class="card">
-<h2>Contact Us</h2>
-<p>Need assistance or want to make an enquiry?</p>
-<a href="https://wa.me/254746885823" target="_blank">
-<button type="button">Chat with us on WhatsApp</button>
-</a>
-</div>
-
-</div>
-
-<footer>
-<p>Viral Hub © 2026</p>
-<p>Digital creative & promotional services</p>
-</footer>
+<footer>VIRAL &copy; 2026 — Social Promotion</footer>
 
 <script>
-document.getElementById("orderForm").addEventListener("submit", function(e){
-  e.preventDefault();
+function submitOrder() {
+  const platform = document.getElementById("platform").value;
+  const post = document.getElementById("post").value;
+  const pack = document.getElementById("package").value;
+  const goal = document.getElementById("goal").value;
+  const details = document.getElementById("details").value;
 
-  const name = document.getElementById("customerName").value.trim();
-  const service = document.getElementById("service").value;
-  const details = document.getElementById("details").value.trim();
+  if (!post) {
+    alert("Please enter your social media post link.");
+    return;
+  }
 
   const message =
-    "Hello Viral Hub! I would like to place an order.%0A%0A" +
-    "Name: " + encodeURIComponent(name) + "%0A" +
-    "Service: " + encodeURIComponent(service) + "%0A" +
-    "Details: " + encodeURIComponent(details);
+    "Hello VIRAL! I would like to request a promotion.\\n\\n" +
+    "Platform: " + platform + "\\n" +
+    "Post: " + post + "\\n" +
+    "Package: " + pack + "\\n" +
+    "Goal: " + goal + "\\n" +
+    "Details: " + details;
 
-  window.open("https://wa.me/254746885823?text=" + message, "_blank");
-});
+  const whatsapp =
+    "https://wa.me/254746885823?text=" +
+    encodeURIComponent(message);
+
+  window.open(whatsapp, "_blank");
+}
+
+document.getElementById("platform").onchange = function() {
+  document.getElementById("summary").textContent =
+    "Platform: " + this.value;
+};
 </script>
 
 </body>
