@@ -1,1 +1,286 @@
-https://01a0c81d-307f-7ad8-a0c1-5f42fe96a8b0.arena.site/
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SocialBoost Kenya</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#10111a;color:#fff}
+header{text-align:center;padding:25px;background:#191b29}
+header h1{color:#00e5a0;margin-bottom:8px}
+.container{max-width:700px;margin:25px auto;padding:15px}
+.card{background:#1c1e2e;padding:20px;border-radius:15px;margin-bottom:20px}
+input,select{width:100%;padding:13px;margin-top:8px;border:0;border-radius:8px;background:#292c3d;color:white}
+label{display:block;margin-top:15px}
+button{width:100%;padding:14px;border:0;border-radius:9px;margin-top:15px;cursor:pointer;font-weight:bold;background:#00e5a0;color:#10111a}
+.secondary{background:#35394c;color:white}
+.whatsapp{background:#25D366;color:white}
+.price{font-size:24px;color:#00e5a0;margin:15px 0}
+.small{font-size:13px;color:#b5b6c4}
+.item{background:#292c3d;padding:12px;border-radius:9px;margin:10px 0}
+hr{border:0;border-top:1px solid #383b4e;margin:18px 0}
+footer{text-align:center;padding:25px;color:#aaa}
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<header>
+<h1>SocialBoost Kenya</h1>
+<p>Social Media Promotion & Marketing</p>
+</header>
+
+<div class="container">
+
+<!-- DASHBOARD -->
+<div class="card">
+<h2>Account Dashboard</h2>
+<div class="price">Balance: KSh <span id="balance">0</span></div>
+<p>Confirmed payments: <span id="paidCount">0</span></p>
+<p>Pending orders: <span id="pendingCount">0</span></p>
+<p>Total orders: <span id="orderCount">0</span></p>
+<p class="small">Balance reflects manually confirmed payments.</p>
+</div>
+
+<!-- ORDER FORM -->
+<div class="card">
+<h2>Place an Order</h2>
+
+<label>Platform</label>
+<select id="platform" onchange="updateServices()">
+<option value="TikTok">TikTok</option>
+<option value="Facebook">Facebook</option>
+<option value="WhatsApp">WhatsApp</option>
+</select>
+
+<label>Service</label>
+<select id="service" onchange="calculatePrice()"></select>
+
+<label>Package</label>
+<select id="quantity" onchange="calculatePrice()">
+<option value="100">Starter - KSh 100</option>
+<option value="300">Standard - KSh 300</option>
+<option value="500">Premium - KSh 500</option>
+</select>
+
+<label>Profile, Page, or Channel Link</label>
+<input id="link" placeholder="Paste your social media link">
+
+<label>Your Name</label>
+<input id="customer" placeholder="Enter your name">
+
+<label>Phone Number</label>
+<input id="phone" type="tel" placeholder="07XXXXXXXX">
+
+<div class="price">Total: KSh <span id="total">100</span></div>
+
+<button onclick="placeOrder()">Place Order & WhatsApp</button>
+<div id="orderMessage"></div>
+</div>
+
+<!-- PAYMENT -->
+<div class="card">
+<h2>Payment Details</h2>
+<p>Pay using M-Pesa Send Money:</p>
+<div class="item">
+<h2 style="color:#00e5a0">0746885823</h2>
+<p>Payment Method: M-Pesa</p>
+<p>Option: Send Money</p>
+</div>
+<p>Keep your M-Pesa confirmation message for verification.</p>
+</div>
+
+<!-- WHATSAPP -->
+<div class="card">
+<h2>Contact Us</h2>
+<p>Need help with your order?</p>
+<a href="https://wa.me/254746885823?text=Hello%2C%20I%20need%20help."
+target="_blank" style="text-decoration:none">
+<button class="whatsapp">Chat with us on WhatsApp</button>
+</a>
+</div>
+
+<!-- ADMIN -->
+<div class="card">
+<h2>Admin Panel</h2>
+<p class="small">Owner use only</p>
+<input id="adminPin" type="password" placeholder="Enter admin PIN">
+<button onclick="loginAdmin()">Login</button>
+
+<div id="adminArea" class="hidden">
+<hr>
+<h3>Orders</h3>
+<div id="orders"></div>
+<button class="secondary" onclick="logoutAdmin()">Logout</button>
+</div>
+</div>
+
+</div>
+
+<footer>© 2026 SocialBoost Kenya</footer>
+
+<script>
+const ADMIN_PIN = "2468";
+
+const services = {
+TikTok: ["Content Promotion Campaign", "Creator Marketing Support"],
+Facebook: ["Page Promotion Campaign", "Content Marketing Support"],
+WhatsApp: ["Channel Promotion Campaign", "Business Marketing Support"]
+};
+
+function getOrders(){
+return JSON.parse(localStorage.getItem("sb_orders") || "[]");
+}
+
+function saveOrders(orders){
+localStorage.setItem("sb_orders", JSON.stringify(orders));
+}
+
+function updateServices(){
+const platform=document.getElementById("platform").value;
+const select=document.getElementById("service");
+select.innerHTML="";
+
+services[platform].forEach(s=>{
+const opt=document.createElement("option");
+opt.value=s;
+opt.textContent=s;
+select.appendChild(opt);
+});
+calculatePrice();
+}
+
+function calculatePrice(){
+const q=Number(document.getElementById("quantity").value);
+document.getElementById("total").textContent=q;
+}
+
+function placeOrder(){
+const customer=document.getElementById("customer").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const link=document.getElementById("link").value.trim();
+const platform=document.getElementById("platform").value;
+const service=document.getElementById("service").value;
+const amount=Number(document.getElementById("quantity").value);
+
+if(!customer || !phone || !link){
+alert("Please fill in all details.");
+return;
+}
+
+const order={
+id:"SB"+Date.now().toString().slice(-7),
+customer,phone,link,platform,service,amount,
+status:"Pending",
+date:new Date().toLocaleString()
+};
+
+const orders=getOrders();
+orders.unshift(order);
+saveOrders(orders);
+updateDashboard();
+
+const message=`Hello SocialBoost Kenya!
+I have placed an order.
+
+Order ID: ${order.id}
+Name: ${customer}
+Platform: ${platform}
+Service: ${service}
+Package: KSh ${amount}
+Link: ${link}
+
+I will pay via M-Pesa Send Money to 0746885823.`;
+
+document.getElementById("orderMessage").innerHTML=
+"<p>Order saved! WhatsApp is opening.</p>";
+
+const waURL="https://wa.me/254746885823?text="+encodeURIComponent(message);
+window.open(waURL,"_blank");
+}
+
+function updateDashboard(){
+const orders=getOrders();
+const paid=orders.filter(o=>o.status==="Paid");
+const pending=orders.filter(o=>o.status==="Pending");
+const balance=paid.reduce((sum,o)=>sum+o.amount,0);
+
+document.getElementById("balance").textContent=balance.toLocaleString();
+document.getElementById("paidCount").textContent=paid.length;
+document.getElementById("pendingCount").textContent=pending.length;
+document.getElementById("orderCount").textContent=orders.length;
+}
+
+function loginAdmin(){
+if(document.getElementById("adminPin").value===ADMIN_PIN){
+document.getElementById("adminArea").classList.remove("hidden");
+showOrders();
+}else{
+alert("Incorrect PIN");
+}
+}
+
+function logoutAdmin(){
+document.getElementById("adminArea").classList.add("hidden");
+document.getElementById("adminPin").value="";
+}
+
+function showOrders(){
+const orders=getOrders();
+const area=document.getElementById("orders");
+area.innerHTML="";
+
+if(!orders.length){
+area.innerHTML="<p>No orders yet.</p>";
+return;
+}
+
+orders.forEach(o=>{
+const div=document.createElement("div");
+div.className="item";
+
+const details=document.createElement("div");
+details.textContent=
+`${o.id} | ${o.customer} | ${o.platform} | KSh ${o.amount} | ${o.status} | ${o.date}`;
+div.appendChild(details);
+
+const link=document.createElement("p");
+link.textContent="Link: "+o.link;
+div.appendChild(link);
+
+if(o.status==="Pending"){
+const btn=document.createElement("button");
+btn.textContent="Confirm Payment Received";
+btn.onclick=()=>confirmPayment(o.id);
+div.appendChild(btn);
+}
+
+area.appendChild(div);
+});
+}
+
+function confirmPayment(id){
+if(!confirm("Have you verified the M-Pesa payment?")){
+return;
+}
+
+const orders=getOrders();
+const order=orders.find(o=>o.id===id);
+
+if(order){
+order.status="Paid";
+saveOrders(orders);
+updateDashboard();
+showOrders();
+}
+}
+
+updateServices();
+updateDashboard();
+</script>
+
+</body>
+</html>
+
